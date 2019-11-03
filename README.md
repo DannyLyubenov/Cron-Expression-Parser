@@ -1,14 +1,12 @@
 # Cron Expression Parser
 
-Program to create a tabular representation of cron expressions
+Python program to create a tabular representation of cron expressions
 
 ## Prerequisites
 
-```
-    - activate Python virtual environment
+- activate Python virtual environment
 
-    - pip3 install -r requirements.txt
-```
+- pip3 install -r requirements.txt
 
 ## Usage
 
@@ -22,12 +20,12 @@ Program to create a tabular representation of cron expressions
     parameter 6: command
 
     example: main.py */15 0 1,15 * 1-5 /usr/bin/find
+
+    Note: The program will catch any invalid cron combinations
 </pre>
 
 ## Unit Tests
 
 Run pre-configured unit tests for the program
 
-```
-    - ./tests.py
-```
+- ./tests.py
