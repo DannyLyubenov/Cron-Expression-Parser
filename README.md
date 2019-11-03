@@ -4,9 +4,10 @@ Python program to create a tabular representation of cron expressions
 
 ## Prerequisites
 
-- activate Python virtual environment
-
-- pip3 install -r requirements.txt
+```
+activate Python virtual environment
+pip3 install -r requirements.txt
+```
 
 ## Usage
 
@@ -27,5 +28,6 @@ Python program to create a tabular representation of cron expressions
 ## Unit Tests
 
 Run pre-configured unit tests for the program
-
-- ./tests.py
+```
+python tests.py
+```
