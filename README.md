@@ -5,6 +5,7 @@ Python program to create a tabular representation of cron expressions
 ## Prerequisites
 
 ```
+(OS X or Linux)
 activate Python virtual environment
 pip3 install -r requirements.txt
 ```
