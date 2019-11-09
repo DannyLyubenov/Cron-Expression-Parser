@@ -42,10 +42,11 @@ def describe_cron(cron_field,min_num,max_num):
   :param str cron_field: individual crontab field
   :param int min_num: the minimum value associated with each field
   :param int max_num: the maximum value associated with each field
-  :return str describe_cron_string: formatted user-friendly string
+  :return str cron_list: formatted user-friendly string
   """
 
-  describe_cron_string = ""
+  cron_list = []
+  cron_str = ""
   #------ Step Value ------ 
   if("/" in cron_field):
     step_value = cron_field.split("/")
@@ -61,9 +62,7 @@ def describe_cron(cron_field,min_num,max_num):
       value_2_is_asterisk = True
 
     # error check if values are in a valid range
-    if(int(step_value[0]) < min_num or int(step_value[0]) > max_num or int(step_value[1]) < min_num or int(step_value[1]) > max_num):
-      print("ERROR: valid range " + "[" + str(min_num) + "-" + str(max_num) + "]")
-      sys.exit()
+    valid_string(step_value[0],step_value[1],min_num,max_num)
 
     # convert back all the values to asterisk
     if(value_1_is_asterisk):
@@ -73,10 +72,12 @@ def describe_cron(cron_field,min_num,max_num):
     
     if(step_value[0] == "*"):
       for i in range(min_num,max_num+1,int(step_value[1])):
-        describe_cron_string += str(i) + " "  
+        # cron_list += str(i) + " "  
+        cron_list.append(i)
     else:
       for i in range(int(step_value[0]),max_num+1,int(step_value[1])):
-        describe_cron_string += str(i) + " "   
+        # cron_list += str(i) + " "  
+        cron_list.append(i)  
 
   #------ Range Value ------
   elif("-" in cron_field):
@@ -93,12 +94,11 @@ def describe_cron(cron_field,min_num,max_num):
       range_value[1] = "100"
       value_2_is_asterisk = True
 
-    if(int(range_value[0]) < min_num or int(range_value[0]) > max_num or int(range_value[1]) < min_num or int(range_value[1]) > max_num):
-      print("ERROR: valid range " + "[" + str(min_num) + "-" + str(max_num) + "]")
-      sys.exit()
+    valid_string(range_value[0],range_value[1],min_num,max_num)
 
     for i in range(int(range_value[0]),int(range_value[1])+1):
-      describe_cron_string += str(i) + " "
+      # cron_list += str(i) + " "
+      cron_list.append(i)
 
   #------ Value List Separator ------
   elif("," in cron_field):
@@ -113,9 +113,7 @@ def describe_cron(cron_field,min_num,max_num):
       list_value[1] = "1"
       value_2_is_asterisk = True
 
-    if(int(list_value[0]) < min_num or int(list_value[0]) > max_num or int(list_value[1]) < min_num or int(list_value[1]) > max_num):
-      print("ERROR: valid range " + "[" + str(min_num) + "-" + str(max_num) + "]")
-      sys.exit()
+    valid_string(list_value[0],list_value[1],min_num,max_num)
 
     if(value_1_is_asterisk):
       list_value[0] = "*"
@@ -124,15 +122,20 @@ def describe_cron(cron_field,min_num,max_num):
 
     if(list_value[0] == "*"):
       for i in range(min_num,max_num+1):
-        describe_cron_string += str(i) + " "
+        # cron_list += str(i) + " "
+        cron_list.append(i)
     else:
-      describe_cron_string += str(list_value[0]) + " "
+      # cron_list += str(list_value[0]) + " "
+        cron_list.append(list_value[0])
     
     if(list_value[1] == "*"):
       for i in range(min_num,max_num+1):
-        describe_cron_string += str(i) + " "
+        # cron_list += str(i) + " "
+        cron_list.append(i)
     else:
-      describe_cron_string += str(list_value[1]) + " "
+      # cron_list += str(list_value[1]) + " "
+        cron_list.append(list_value[1])
+
 
   #------ Regular Numbers ------
   else:
@@ -147,16 +150,25 @@ def describe_cron(cron_field,min_num,max_num):
       # display all numbers if asterisk is used
       if(value_1_is_asterisk):
         for i in range(min_num,max_num+1):
-          describe_cron_string += str(i) + " "
+          # cron_list += str(i) + " "
+          cron_list.append(i)
       else:
 
         # display only a single valid number
-        describe_cron_string = cron_field
+        # cron_list = cron_field
+        cron_list.append(cron_field)
     else:
       print("ERROR: valid range " + "[" + str(min_num) + "-" + str(max_num) + "]")
       sys.exit()
-      
-  return describe_cron_string    
+  
+  # convert list to string
+  cron_str = ' '.join(map(str, cron_list))
+  return cron_str    
+
+def valid_string(num1, num2, min_num, max_num):
+  if(int(num1) < min_num or int(num1) > max_num or int(num2) < min_num or int(num2) > max_num):
+    print("ERROR: valid range " + "[" + str(min_num) + "-" + str(max_num) + "]")
+    sys.exit()
 
 
 if __name__=='__main__':
