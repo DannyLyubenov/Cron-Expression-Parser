@@ -32,5 +32,5 @@ pip3 install -r requirements.txt
 
 Run pre-configured unit tests for the program
 ```
-python tests.py
+python unit_test.py
 ```
