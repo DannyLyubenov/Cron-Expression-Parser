@@ -143,12 +143,10 @@ def describe_cron(cron_field,min_num,max_num):
       # display all numbers if asterisk is used
       if(value_1_is_asterisk):
         for i in range(min_num,max_num+1):
-          # cron_list += str(i) + " "
           cron_list.append(i)
       else:
 
         # display only a single valid number
-        # cron_list = cron_field
         cron_list.append(cron_field)
     else:
       print("ERROR: valid range " + "[" + str(min_num) + "-" + str(max_num) + "]")
