@@ -23,6 +23,8 @@ pip3 install -r requirements.txt
     example: main.py */15 0 1,15 * 1-5 /usr/bin/find
 
     Note: The program will catch any invalid cron combinations
+    Limitation: The program does not handle special strings such as @yearly
+
 </pre>
 
 ## Unit Tests
