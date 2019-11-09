@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 import unittest
-from prettytable import PrettyTable
 from main import describe_cron
 
 class TestCases(unittest.TestCase):
