@@ -42,7 +42,7 @@ def describe_cron(cron_field,min_num,max_num):
   :param str cron_field: individual crontab field
   :param int min_num: the minimum value associated with each field
   :param int max_num: the maximum value associated with each field
-  :return str cron_list: formatted user-friendly string
+  :return str cron_str: formatted user-friendly string
   """
 
   cron_list = []
@@ -71,12 +71,10 @@ def describe_cron(cron_field,min_num,max_num):
       step_value[1] = "*"
     
     if(step_value[0] == "*"):
-      for i in range(min_num,max_num+1,int(step_value[1])):
-        # cron_list += str(i) + " "  
+      for i in range(min_num,max_num+1,int(step_value[1])):        
         cron_list.append(i)
     else:
-      for i in range(int(step_value[0]),max_num+1,int(step_value[1])):
-        # cron_list += str(i) + " "  
+      for i in range(int(step_value[0]),max_num+1,int(step_value[1])):        
         cron_list.append(i)  
 
   #------ Range Value ------
@@ -96,8 +94,7 @@ def describe_cron(cron_field,min_num,max_num):
 
     valid_string(range_value[0],range_value[1],min_num,max_num)
 
-    for i in range(int(range_value[0]),int(range_value[1])+1):
-      # cron_list += str(i) + " "
+    for i in range(int(range_value[0]),int(range_value[1])+1):      
       cron_list.append(i)
 
   #------ Value List Separator ------
@@ -121,19 +118,15 @@ def describe_cron(cron_field,min_num,max_num):
       list_value[1] = "*"
 
     if(list_value[0] == "*"):
-      for i in range(min_num,max_num+1):
-        # cron_list += str(i) + " "
+      for i in range(min_num,max_num+1):        
         cron_list.append(i)
-    else:
-      # cron_list += str(list_value[0]) + " "
+    else:      
         cron_list.append(list_value[0])
     
     if(list_value[1] == "*"):
-      for i in range(min_num,max_num+1):
-        # cron_list += str(i) + " "
+      for i in range(min_num,max_num+1):        
         cron_list.append(i)
-    else:
-      # cron_list += str(list_value[1]) + " "
+    else:      
         cron_list.append(list_value[1])
 
 
@@ -163,13 +156,16 @@ def describe_cron(cron_field,min_num,max_num):
   
   # convert list to string
   cron_str = ' '.join(map(str, cron_list))
+
   return cron_str    
 
 def valid_string(num1, num2, min_num, max_num):
+  """
+    Error checking if the numbers are in range
+  """
   if(int(num1) < min_num or int(num1) > max_num or int(num2) < min_num or int(num2) > max_num):
     print("ERROR: valid range " + "[" + str(min_num) + "-" + str(max_num) + "]")
     sys.exit()
-
 
 if __name__=='__main__':
     main()
